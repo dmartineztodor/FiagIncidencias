@@ -4,8 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.danimt.fiagincidencias.data.local.AppDatabase
@@ -27,8 +32,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            // ✅ Escuchamos el estado del tema
+            val isDarkTheme by viewModel.isDarkTheme.collectAsState()
             val navController = rememberNavController()
-            MaterialTheme {
+
+            // Definimos los esquemas de color (Básico)
+            val colorScheme = if (isDarkTheme) darkColorScheme() else lightColorScheme()
+
+            MaterialTheme(
+                colorScheme = colorScheme // ✅ Aplicamos el tema elegido
+            ) {
                 Surface {
                     AppNavHost(
                         navController = navController,

@@ -59,6 +59,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
 
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

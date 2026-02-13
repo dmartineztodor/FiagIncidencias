@@ -21,26 +21,28 @@ fun AppNavHost(
         startDestination = Screen.Home.route,
         modifier = modifier
     ) {
+        // Pantalla Principal
         composable(Screen.Home.route) {
             HomeScreen(
                 viewModel = viewModel,
-                onAddClick = { navController.navigate(Screen.Add.route) },
+                onAddClick = { navController.navigate(Screen.AddIncident.route) },
                 onSettingsClick = { navController.navigate(Screen.Settings.route) }
             )
         }
-        composable(Screen.Add.route) {
+
+        // Pantalla de Añadir (Corrección: onBackClick)
+        composable(Screen.AddIncident.route) {
             AddIncidentScreen(
-                onSave = { incident ->
-                    viewModel.addIncident(incident)
-                    navController.popBackStack()
-                },
-                onBack = { navController.popBackStack() }
+                viewModel = viewModel,
+                onBackClick = { navController.popBackStack() } // ✅ Ahora coincide con el parámetro
             )
         }
+
+        // Pantalla de Ajustes (Corrección: onBackClick)
         composable(Screen.Settings.route) {
             SettingsScreen(
                 viewModel = viewModel,
-                onBack = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() } // ✅ Ahora coincide con el parámetro
             )
         }
     }
