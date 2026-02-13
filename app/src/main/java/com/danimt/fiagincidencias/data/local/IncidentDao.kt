@@ -16,4 +16,8 @@ interface IncidentDao {
 
     @Query("SELECT * FROM incidents WHERE status = :status ORDER BY timestamp DESC")
     fun getByStatus(status: Status): Flow<List<Incident>>
+
+    // En IncidentDao.kt
+    @Query("SELECT * FROM incidents WHERE status = :status")
+    suspend fun getByStatusSync(status: Status): List<Incident>
 }

@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 
 @Database(entities = [Incident::class], version = 1, exportSchema = false)
 @TypeConverters(IncidentConverters::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class  AppDatabase : RoomDatabase() {
     abstract fun incidentDao(): IncidentDao
 
     companion object {
